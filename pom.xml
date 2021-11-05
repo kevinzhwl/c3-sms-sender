@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.github.kevinzhwl</groupId>
+    <groupId>io.github.kevinzhwl</groupId>
     <artifactId>c3-java-sms-sender</artifactId>
     <version>${revision}</version>
     <name>SmsCenter Java Sender</name>
@@ -25,7 +25,7 @@
     </licenses>
     <scm>
         <tag>master</tag>
-        <url>https://github.com/kevinzhwl/c3-sms-sender.git</url>
+        <url>https://github.com/kevinzhwl/c3-sms-sender</url>
         <connection>scm:git:https://github.com/kevinzhwl/c3-sms-sender.git</connection>
         <developerConnection>scm:git:https://github.com/kevinzhwl/c3-sms-sender.git</developerConnection>
     </scm>
