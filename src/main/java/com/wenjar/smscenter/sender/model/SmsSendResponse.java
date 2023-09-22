@@ -1,4 +1,4 @@
-package com.wenjar.smscenter.sender.common.model;
+package com.wenjar.smscenter.sender.model;
 
 import lombok.Data;
 import lombok.ToString;
@@ -6,21 +6,14 @@ import lombok.ToString;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- */
 @ToString(callSuper = true)
 @Data
-public class SmsSendResp extends ApiBaseResult {
+public class SmsSendResponse extends ApiBaseResult {
 
   private Map<String, Integer> results = new HashMap<>();
   private Map<String, String> channel = new HashMap<>();
 
   private Map<String, ChannelResult> details = new HashMap<>();
-
-  public SmsSendResp() {
-  }
-
 
   @Data
   public static class ChannelResult {
@@ -28,9 +21,6 @@ public class SmsSendResp extends ApiBaseResult {
     private String channelName;
     private Integer resultCode;
     private String resultNote;
-
-    public ChannelResult() {
-    }
 
   }
 }

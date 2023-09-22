@@ -1,11 +1,12 @@
-package com.wenjar.smscenter.sender.provider.saas;
+package com.wenjar.smscenter.sender.client.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.wenjar.smscenter.sender.common.client.C3ClientConfig;
-import com.wenjar.smscenter.sender.common.client.C3Credentials;
-import com.wenjar.smscenter.sender.common.client.C3SmsBaseClient;
-import com.wenjar.smscenter.sender.common.model.SmsSendResp;
+import com.wenjar.smscenter.sender.client.C3ClientConfig;
+import com.wenjar.smscenter.sender.client.C3Credentials;
+import com.wenjar.smscenter.sender.client.C3SmsBaseClient;
+import com.wenjar.smscenter.sender.model.SmsSendRequest;
+import com.wenjar.smscenter.sender.model.SmsSendResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
@@ -22,16 +23,10 @@ import org.apache.http.util.EntityUtils;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
 
-/**
- *
- */
 @Slf4j
 public class C3SmsSenderImpl extends C3SmsBaseClient {
-  private static Gson gson = new GsonBuilder().create();
-
+  private Gson gson;
   private C3Credentials cred;
   private C3ClientConfig clientConfig;
   private RequestConfig requestConfig;
@@ -42,35 +37,29 @@ public class C3SmsSenderImpl extends C3SmsBaseClient {
 
     this.cred = cred;
     this.clientConfig = config;
-  }
-
-  protected void build() {
     //超时设置
     requestConfig = RequestConfig.custom().setConnectTimeout(clientConfig.getConnectionTimeout()).setSocketTimeout(clientConfig.getSocketTimeout()).build();
+    gson = new GsonBuilder().create();
+
   }
 
-  public SmsSendResp send(String mobile, String content) {
-    return send(Arrays.asList(mobile), content);
+  public String getMsgSignature() {
+    return cred.getAppSignature();
   }
 
-  public SmsSendResp send(List<String> mobiles, String content) {
+  public SmsSendResponse send(SmsSendRequest request) {
 
-    return send(mobiles, content, cred.getAppSignature());
-  }
-
-  public SmsSendResp send(List<String> mobiles, String content, String signature) {
-
-    SmsReqVO req = new SmsReqVO();
+    SmsParams req = new SmsParams();
     req.setAppId(cred.getAppId());
     req.setAppToken(cred.getAppToken());
-    req.setMsgSignature(signature);
-    req.setMsgContent(content);
-    req.setMobiles(mobiles);
+    req.setMsgSignature(request.getMsgSignature());
+    req.setMsgContent(request.getMsgContent());
+    req.setMobiles(request.getMobiles());
 
     return this.send0(clientConfig.getServiceEndpoint(), req);
   }
 
-  private SmsSendResp send0(String url, SmsReqVO req) {
+  private SmsSendResponse send0(String url, SmsParams req) {
     rejectNull(url, "url cannot be null");
     rejectNull(req, "req cannot be null");
     rejectNull(req.getAppId(), "appId cannot be null");
@@ -107,7 +96,7 @@ public class C3SmsSenderImpl extends C3SmsBaseClient {
       }
       HttpEntity entity = response.getEntity();
       responseBody = EntityUtils.toString(entity, StandardCharsets.UTF_8);
-      return gson.fromJson(responseBody, SmsSendResp.class);
+      return gson.fromJson(responseBody, SmsSendResponse.class);
     } catch (Exception e) {
       log.error("Exception:", e);
     } finally {

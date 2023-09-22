@@ -1,4 +1,4 @@
-package com.wenjar.smscenter.sender.common.client;
+package com.wenjar.smscenter.sender.client;
 
 
 import lombok.Data;
@@ -10,9 +10,6 @@ public class C3SimpleCredentialsImpl implements C3Credentials {
   private String appToken;
 
   private String appSignature;
-
-  public C3SimpleCredentialsImpl() {
-  }
 
   public C3SimpleCredentialsImpl(String accessKey, String secretKey) {
     if (accessKey == null) {

@@ -1,12 +1,12 @@
-package com.wenjar.smscenter.sender.example;
+package com.wenjar.smscenter.sender.common.model;
 
 
-import com.wenjar.smscenter.sender.common.client.C3ClientConfig;
-import com.wenjar.smscenter.sender.common.client.C3Credentials;
-import com.wenjar.smscenter.sender.common.client.C3SimpleCredentialsImpl;
-import com.wenjar.smscenter.sender.common.client.C3SmsClient;
-import com.wenjar.smscenter.sender.common.model.SmsSendResp;
-import com.wenjar.smscenter.sender.provider.saas.C3SmsSenderImpl;
+import com.wenjar.smscenter.sender.client.C3ClientConfig;
+import com.wenjar.smscenter.sender.client.C3Credentials;
+import com.wenjar.smscenter.sender.client.C3SimpleCredentialsImpl;
+import com.wenjar.smscenter.sender.client.C3SmsClient;
+import com.wenjar.smscenter.sender.client.impl.C3SmsSenderImpl;
+import com.wenjar.smscenter.sender.model.SmsSendResponse;
 
 public class SimpleDemo {
 
@@ -23,7 +23,7 @@ public class SimpleDemo {
       String phone = "13601239876";
       String content = "验证码475482，请尽快填写！";
 
-      SmsSendResp resp = ossClient.send(phone, content);
+      SmsSendResponse resp = ossClient.send(phone, content);
       System.out.println(resp);
       final boolean success = ossClient.doesSuccess(resp);
       if (success) {

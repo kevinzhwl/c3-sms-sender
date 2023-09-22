@@ -1,4 +1,4 @@
-package com.wenjar.smscenter.sender.common.client;
+package com.wenjar.smscenter.sender.client;
 
 public interface C3Credentials {
 

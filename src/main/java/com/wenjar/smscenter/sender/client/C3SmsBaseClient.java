@@ -1,8 +1,11 @@
-package com.wenjar.smscenter.sender.common.client;
+package com.wenjar.smscenter.sender.client;
 
 
-import com.wenjar.smscenter.sender.common.model.ApiStatusCode;
-import com.wenjar.smscenter.sender.common.model.SmsSendResp;
+import com.wenjar.smscenter.sender.model.ApiStatusCode;
+import com.wenjar.smscenter.sender.model.SmsSendRequest;
+import com.wenjar.smscenter.sender.model.SmsSendResponse;
+
+import java.util.Arrays;
 
 public abstract class C3SmsBaseClient implements C3SmsClient {
 
@@ -27,12 +30,21 @@ public abstract class C3SmsBaseClient implements C3SmsClient {
     }
   }
 
-  public boolean doesSuccess(SmsSendResp resp) {
+  public boolean doesSuccess(SmsSendResponse resp) {
     if (resp != null && resp.getCode() != null) {
       //支持当前的值 REQUEST_DONE 和 预留的值 OK
       return (resp.getCode() == ApiStatusCode.REQUEST_DONE.getCode() || resp.getCode() == ApiStatusCode.OK.getCode());
     }
 
     return false;
+  }
+
+  public SmsSendResponse send(String mobile, String content) {
+
+    SmsSendRequest request = new SmsSendRequest();
+    request.setMobiles(Arrays.asList(mobile));
+    request.setMsgContent(content);
+    request.setMsgSignature(this.getMsgSignature());
+    return send(request);
   }
 }
