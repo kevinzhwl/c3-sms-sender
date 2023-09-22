@@ -1,11 +1,11 @@
 package com.wenjar.smscenter.sender.common.model;
 
 
-import com.wenjar.smscenter.sender.client.C3ClientConfig;
-import com.wenjar.smscenter.sender.client.C3Credentials;
-import com.wenjar.smscenter.sender.client.C3SimpleCredentialsImpl;
+import com.wenjar.smscenter.sender.config.C3ClientConfig;
+import com.wenjar.smscenter.sender.config.C3Credentials;
+import com.wenjar.smscenter.sender.config.impl.C3SimpleCredentialsImpl;
 import com.wenjar.smscenter.sender.client.C3SmsClient;
-import com.wenjar.smscenter.sender.client.impl.C3SmsSenderImpl;
+import com.wenjar.smscenter.sender.client.impl.C3SmsSimpleClientImpl;
 import com.wenjar.smscenter.sender.model.SmsSendResponse;
 
 public class SimpleDemo {
@@ -17,7 +17,7 @@ public class SimpleDemo {
 
     C3ClientConfig cf = new C3ClientConfig("http://message.center.url/api/send");
 
-    C3SmsClient ossClient = new C3SmsSenderImpl(cred, cf);
+    C3SmsClient ossClient = new C3SmsSimpleClientImpl(cred, cf);
 
     try {
       String phone = "13601239876";

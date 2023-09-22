@@ -2,8 +2,8 @@ package com.wenjar.smscenter.sender.client.impl;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.wenjar.smscenter.sender.client.C3ClientConfig;
-import com.wenjar.smscenter.sender.client.C3Credentials;
+import com.wenjar.smscenter.sender.config.C3ClientConfig;
+import com.wenjar.smscenter.sender.config.C3Credentials;
 import com.wenjar.smscenter.sender.client.C3SmsBaseClient;
 import com.wenjar.smscenter.sender.model.SmsSendRequest;
 import com.wenjar.smscenter.sender.model.SmsSendResponse;
@@ -25,13 +25,13 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 @Slf4j
-public class C3SmsSenderImpl extends C3SmsBaseClient {
+public class C3SmsSimpleClientImpl extends C3SmsBaseClient {
   private Gson gson;
   private C3Credentials cred;
   private C3ClientConfig clientConfig;
   private RequestConfig requestConfig;
 
-  public C3SmsSenderImpl(C3Credentials cred, C3ClientConfig config) {
+  public C3SmsSimpleClientImpl(C3Credentials cred, C3ClientConfig config) {
     rejectNull(cred, "cred cannot be null");
     rejectNull(config, "config cannot be null");
 
@@ -43,7 +43,7 @@ public class C3SmsSenderImpl extends C3SmsBaseClient {
 
   }
 
-  public String getMsgSignature() {
+  public String readSignature() {
     return cred.getAppSignature();
   }
 

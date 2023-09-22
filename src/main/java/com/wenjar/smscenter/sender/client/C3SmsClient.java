@@ -5,7 +5,6 @@ import com.wenjar.smscenter.sender.model.SmsSendResponse;
 
 public interface C3SmsClient {
   boolean doesSuccess(SmsSendResponse resp);
-  String getMsgSignature();
 
   SmsSendResponse send(String mobile, String content);
 

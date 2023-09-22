@@ -8,6 +8,7 @@ import com.wenjar.smscenter.sender.model.SmsSendResponse;
 import java.util.Arrays;
 
 public abstract class C3SmsBaseClient implements C3SmsClient {
+  public abstract String readSignature();
 
   protected void rejectNull(Object parameterValue, String errorMessage) {
     if (parameterValue == null) {
@@ -44,7 +45,7 @@ public abstract class C3SmsBaseClient implements C3SmsClient {
     SmsSendRequest request = new SmsSendRequest();
     request.setMobiles(Arrays.asList(mobile));
     request.setMsgContent(content);
-    request.setMsgSignature(this.getMsgSignature());
+    request.setMsgSignature(this.readSignature());
     return send(request);
   }
 }

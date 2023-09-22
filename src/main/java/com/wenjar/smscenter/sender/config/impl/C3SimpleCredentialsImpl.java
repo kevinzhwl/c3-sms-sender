@@ -1,6 +1,7 @@
-package com.wenjar.smscenter.sender.client;
+package com.wenjar.smscenter.sender.config.impl;
 
 
+import com.wenjar.smscenter.sender.config.C3Credentials;
 import lombok.Data;
 
 @Data
