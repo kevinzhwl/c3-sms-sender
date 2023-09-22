@@ -10,10 +10,10 @@ import lombok.ToString;
 @ToString
 @Data
 public class ApiBaseResult {
-    private Integer code;
+  private Integer code;
 
-    private String message;
+  private String message;
 
-    public ApiBaseResult() {
-    }
+  public ApiBaseResult() {
+  }
 }
